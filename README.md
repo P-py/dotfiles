@@ -1,1 +1,212 @@
-# dotfiles
+# 🏠 Dotfiles
+
+Personal dotfiles for Linux configuration using [oh-my-zsh](https://ohmyz.sh/) and fun plugins!
+
+## ✨ Features
+
+- **ZSH Configuration**: Complete oh-my-zsh setup with useful plugins
+  - Git integration
+  - Docker & Docker Compose support
+  - Python, Node.js, and npm utilities
+  - Auto-suggestions and syntax highlighting
+  - Command history search
+  - FZF integration
+- **Git Configuration**: Colorized output, useful aliases, and sensible defaults
+- **Vim Configuration**: Syntax highlighting, line numbers, smart indentation
+- **Tmux Configuration**: Custom keybindings, mouse support, and pretty status bar
+- **Custom Functions**: Archive extraction, directory navigation, process monitoring
+- **System Aliases**: Quick access to common commands
+
+## 📦 Installation
+
+### Prerequisites
+
+- ZSH (install with: `sudo apt install zsh`)
+- Git (install with: `sudo apt install git`)
+- curl (install with: `sudo apt install curl`)
+
+### Quick Install
+
+```bash
+# Clone the repository
+git clone https://github.com/P-py/dotfiles.git ~/.dotfiles
+
+# Navigate to the directory
+cd ~/.dotfiles
+
+# Run the installation script
+./install.sh
+```
+
+The installation script will:
+1. Install oh-my-zsh if not already installed
+2. Install zsh-autosuggestions plugin
+3. Install zsh-syntax-highlighting plugin
+4. Create symlinks for all dotfiles
+5. Backup any existing configuration files
+
+### Manual Installation
+
+If you prefer to install manually:
+
+```bash
+# Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Install plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+# Create symlinks
+ln -s ~/.dotfiles/.zshrc ~/.zshrc
+ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
+ln -s ~/.dotfiles/.vimrc ~/.vimrc
+ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
+ln -s ~/.dotfiles/.gitignore_global ~/.gitignore_global
+```
+
+## ⚙️ Configuration
+
+### Git Setup
+
+Edit `~/.gitconfig` to set your name and email:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+```
+
+### ZSH Customization
+
+- Main config: `~/.zshrc`
+- Custom functions: `~/.zsh/functions.zsh`
+- Custom aliases: `~/.zsh/aliases.zsh`
+- Environment variables: `~/.zsh/env.zsh`
+- Local overrides: `~/.zshrc.local` (not tracked by git)
+
+### Changing ZSH Theme
+
+Edit `~/.zshrc` and change the `ZSH_THEME` variable. Popular themes:
+- `robbyrussell` (default)
+- `agnoster`
+- `powerlevel10k`
+- See all themes: https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+
+## 🛠️ Included Tools
+
+### ZSH Plugins
+
+- **git**: Git aliases and functions
+- **docker**: Docker command completion
+- **docker-compose**: Docker Compose completion
+- **kubectl**: Kubernetes command completion
+- **python/pip**: Python development tools
+- **npm/node**: Node.js development tools
+- **sudo**: Double ESC to add sudo to previous command
+- **command-not-found**: Suggests package for unknown commands
+- **colored-man-pages**: Colorized man pages
+- **zsh-autosuggestions**: Fish-like autosuggestions
+- **zsh-syntax-highlighting**: Fish-like syntax highlighting
+- **history-substring-search**: Better history search
+- **fzf**: Fuzzy file finder
+
+### Custom Functions
+
+- `extract <file>`: Extract any archive format
+- `mkcd <dir>`: Create directory and cd into it
+- `ff <name>`: Find files by name
+- `fd <name>`: Find directories by name
+- `search <term>`: Grep search in current directory
+- `gpp`: Git push to current branch
+- `gpl`: Git pull from current branch
+- `weather [location]`: Check weather
+- `genpass [length]`: Generate random password
+- `topmem [n]`: Show top N processes by memory
+- `topcpu [n]`: Show top N processes by CPU
+
+### Useful Aliases
+
+**System:**
+- `update`: Update system packages
+- `cleanup`: Clean up old packages
+- `install <pkg>`: Install package
+- `myip`: Get public IP address
+
+**Navigation:**
+- `..`: Go up one directory
+- `...`: Go up two directories
+- `ll`: List all files with details
+
+**Git:**
+- `gs`: Git status
+- `ga`: Git add
+- `gc`: Git commit
+- `gp`: Git push
+- `gl`: Git log (pretty format)
+
+**Docker:**
+- `dc`: Docker compose
+- `dps`: Docker ps
+- `dcu`: Docker compose up
+- `dcd`: Docker compose down
+
+See `.zsh/aliases.zsh` for complete list.
+
+## 🎨 Tmux Keybindings
+
+- **Prefix**: `Ctrl-a` (instead of default `Ctrl-b`)
+- **Split horizontal**: `Prefix + |`
+- **Split vertical**: `Prefix + -`
+- **Reload config**: `Prefix + r`
+- **Navigate panes**: `Alt + Arrow Keys`
+- **Switch windows**: `Shift + Left/Right`
+
+## 📚 Additional Setup
+
+### Set ZSH as Default Shell
+
+```bash
+chsh -s $(which zsh)
+```
+
+### Install Optional Tools
+
+```bash
+# FZF (fuzzy finder)
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+
+# Tmux (if not installed)
+sudo apt install tmux
+
+# Vim (if not installed)
+sudo apt install vim
+```
+
+## 🔧 Updating
+
+To update your dotfiles:
+
+```bash
+cd ~/.dotfiles
+git pull origin main
+./install.sh
+```
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+Feel free to fork this repository and customize it to your needs! If you have suggestions for improvements, please open an issue or pull request.
+
+## 🙏 Credits
+
+- [oh-my-zsh](https://ohmyz.sh/)
+- [zsh-users](https://github.com/zsh-users)
+- All the amazing open-source contributors!
+
+---
+
+**Enjoy your new dotfiles setup! 🎉**

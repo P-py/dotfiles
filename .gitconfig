@@ -1,0 +1,59 @@
+[user]
+	# Set your name and email
+	name = Your Name
+	email = your.email@example.com
+
+[core]
+	editor = vim
+	autocrlf = input
+	excludesfile = ~/.gitignore_global
+
+[color]
+	ui = auto
+	branch = auto
+	diff = auto
+	status = auto
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+
+[color "status"]
+	added = green
+	changed = yellow
+	untracked = red
+
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	ci = commit
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	visual = log --graph --oneline --decorate --all
+	amend = commit --amend
+	undo = reset --soft HEAD^
+
+[push]
+	default = simple
+	followTags = true
+
+[pull]
+	rebase = false
+
+[diff]
+	tool = vimdiff
+
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+
+[init]
+	defaultBranch = main
