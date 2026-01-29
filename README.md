@@ -28,7 +28,7 @@ Personal dotfiles for Linux configuration using [oh-my-zsh](https://ohmyz.sh/) a
 ### Quick Install
 
 ```bash
-# Clone the repository
+# Clone the repository to ~/.dotfiles (recommended location)
 git clone https://github.com/P-py/dotfiles.git ~/.dotfiles
 
 # Navigate to the directory
@@ -38,16 +38,22 @@ cd ~/.dotfiles
 ./install.sh
 ```
 
+**Important Notes:**
+- The installation script will download and execute the oh-my-zsh installation script from the internet. Review it first for security if needed.
+- If you clone to a different location, symlinks will still work as the script uses absolute paths.
+- The script will backup any existing configuration files to `*.backup`
+
 The installation script will:
-1. Install oh-my-zsh if not already installed
-2. Install zsh-autosuggestions plugin
-3. Install zsh-syntax-highlighting plugin
-4. Create symlinks for all dotfiles
-5. Backup any existing configuration files
+1. Check for required dependencies (git, curl)
+2. Install oh-my-zsh if not already installed
+3. Install zsh-autosuggestions plugin
+4. Install zsh-syntax-highlighting plugin
+5. Create symlinks for all dotfiles including custom .zsh configurations
+6. Backup any existing configuration files
 
 ### Manual Installation
 
-If you prefer to install manually:
+If you prefer to install manually or want more control:
 
 ```bash
 # Install oh-my-zsh
@@ -57,12 +63,18 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-# Create symlinks
+# Create .zsh directory
+mkdir -p ~/.zsh
+
+# Create symlinks (adjust path if you cloned elsewhere)
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
 ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/.dotfiles/.vimrc ~/.vimrc
 ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
 ln -s ~/.dotfiles/.gitignore_global ~/.gitignore_global
+ln -s ~/.dotfiles/.zsh/aliases.zsh ~/.zsh/aliases.zsh
+ln -s ~/.dotfiles/.zsh/functions.zsh ~/.zsh/functions.zsh
+ln -s ~/.dotfiles/.zsh/env.zsh ~/.zsh/env.zsh
 ```
 
 ## ⚙️ Configuration
@@ -108,15 +120,18 @@ Edit `~/.zshrc` and change the `ZSH_THEME` variable. Popular themes:
 - **zsh-autosuggestions**: Fish-like autosuggestions
 - **zsh-syntax-highlighting**: Fish-like syntax highlighting
 - **history-substring-search**: Better history search
-- **fzf**: Fuzzy file finder
+
+### Optional Plugins (require manual installation)
+
+- **fzf**: Fuzzy file finder (see [Additional Setup](#additional-setup) for installation)
 
 ### Custom Functions
 
 - `extract <file>`: Extract any archive format
 - `mkcd <dir>`: Create directory and cd into it
 - `ff <name>`: Find files by name
-- `fd <name>`: Find directories by name
-- `search <term>`: Grep search in current directory
+- `finddir <name>`: Find directories by name
+- `grepsearch <term>`: Grep search in current directory
 - `gpp`: Git push to current branch
 - `gpl`: Git pull from current branch
 - `weather [location]`: Check weather

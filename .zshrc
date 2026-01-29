@@ -22,7 +22,6 @@ plugins=(
     zsh-autosuggestions
     zsh-syntax-highlighting
     history-substring-search
-    fzf
 )
 
 # Source oh-my-zsh
@@ -65,11 +64,6 @@ alias gco='git checkout'
 alias dc='docker-compose'
 alias dps='docker ps'
 alias di='docker images'
-
-# Custom functions
-mkcd() {
-    mkdir -p "$1" && cd "$1"
-}
 
 # Load custom configurations if they exist
 if [ -d "$HOME/.zsh" ]; then

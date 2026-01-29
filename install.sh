@@ -9,6 +9,14 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 echo "📦 Installing dotfiles from $DOTFILES_DIR"
 
+# Check for required commands
+for cmd in git curl; do
+    if ! command -v "$cmd" &> /dev/null; then
+        echo "❌ Error: $cmd is not installed. Please install it first."
+        exit 1
+    fi
+done
+
 # Function to create symlink
 link_file() {
     local src=$1
@@ -31,7 +39,12 @@ link_file() {
 # Install oh-my-zsh if not already installed
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     echo "📥 Installing oh-my-zsh..."
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    # Note: This downloads and executes a script from the internet
+    # Review the script at the URL before running on production systems
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || {
+        echo "❌ Failed to install oh-my-zsh"
+        exit 1
+    }
 else
     echo "✅ oh-my-zsh already installed"
 fi
@@ -39,7 +52,10 @@ fi
 # Install zsh-autosuggestions plugin
 if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions" ]; then
     echo "📥 Installing zsh-autosuggestions..."
-    git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
+    git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions || {
+        echo "❌ Failed to install zsh-autosuggestions"
+        exit 1
+    }
 else
     echo "✅ zsh-autosuggestions already installed"
 fi
@@ -47,7 +63,10 @@ fi
 # Install zsh-syntax-highlighting plugin
 if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]; then
     echo "📥 Installing zsh-syntax-highlighting..."
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting || {
+        echo "❌ Failed to install zsh-syntax-highlighting"
+        exit 1
+    }
 else
     echo "✅ zsh-syntax-highlighting already installed"
 fi
@@ -62,16 +81,19 @@ link_file "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 link_file "$DOTFILES_DIR/.gitconfig" "$HOME/.gitconfig"
 link_file "$DOTFILES_DIR/.vimrc" "$HOME/.vimrc"
 link_file "$DOTFILES_DIR/.tmux.conf" "$HOME/.tmux.conf"
+link_file "$DOTFILES_DIR/.gitignore_global" "$HOME/.gitignore_global"
 
-# Copy gitignore_global if exists
-if [ -f "$DOTFILES_DIR/.gitignore_global" ]; then
-    link_file "$DOTFILES_DIR/.gitignore_global" "$HOME/.gitignore_global"
-fi
+# Link custom zsh configuration files
+link_file "$DOTFILES_DIR/.zsh/aliases.zsh" "$HOME/.zsh/aliases.zsh"
+link_file "$DOTFILES_DIR/.zsh/functions.zsh" "$HOME/.zsh/functions.zsh"
+link_file "$DOTFILES_DIR/.zsh/env.zsh" "$HOME/.zsh/env.zsh"
 
 echo ""
 echo "✨ Dotfiles installation complete!"
 echo ""
 echo "Next steps:"
-echo "  1. Edit ~/.gitconfig to set your name and email"
+echo "  1. Edit ~/.gitconfig to set your name and email:"
+echo "     git config --global user.name \"Your Name\""
+echo "     git config --global user.email \"your.email@example.com\""
 echo "  2. Restart your shell or run: source ~/.zshrc"
 echo "  3. Enjoy your new setup! 🎉"

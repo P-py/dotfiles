@@ -5,7 +5,7 @@ alias update='sudo apt update && sudo apt upgrade -y'
 alias cleanup='sudo apt autoremove -y && sudo apt autoclean'
 alias install='sudo apt install'
 alias remove='sudo apt remove'
-alias search='apt search'
+alias aptsearch='apt search'
 
 # Navigation
 alias home='cd ~'
@@ -58,7 +58,7 @@ alias dcd='docker-compose down'
 alias dcr='docker-compose restart'
 alias dcl='docker-compose logs -f'
 alias dclean='docker system prune -a'
-alias dstop='docker stop $(docker ps -aq)'
+alias dstop='docker ps -q | xargs -r docker stop'
 
 # Python
 alias py='python3'

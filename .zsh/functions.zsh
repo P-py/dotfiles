@@ -32,29 +32,24 @@ ff() {
     find . -type f -iname "*$1*"
 }
 
-# Find a directory by name
-fd() {
+# Find a directory by name (renamed from fd to avoid conflict with fd tool)
+finddir() {
     find . -type d -iname "*$1*"
 }
 
-# Quick search in files
-search() {
+# Quick search in files (grep-based)
+grepsearch() {
     grep -r "$1" .
-}
-
-# Get current git branch
-git_current_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
 # Quick git push to current branch
 gpp() {
-    git push origin $(git_current_branch)
+    git push origin $(git branch --show-current)
 }
 
 # Quick git pull from current branch
 gpl() {
-    git pull origin $(git_current_branch)
+    git pull origin $(git branch --show-current)
 }
 
 # Show disk usage of current directory

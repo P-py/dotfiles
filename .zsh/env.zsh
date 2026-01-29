@@ -12,9 +12,13 @@ fi
 export BROWSER='firefox'
 export TERMINAL='gnome-terminal'
 
-# Development environment
-export GOPATH="$HOME/go"
-export PATH="$GOPATH/bin:$PATH"
+# Development environment - only add to PATH if Go is installed
+if command -v go &> /dev/null; then
+    export GOPATH="$HOME/go"
+    if [ -d "$GOPATH/bin" ]; then
+        export PATH="$GOPATH/bin:$PATH"
+    fi
+fi
 
 # Python
 export PYTHONDONTWRITEBYTECODE=1
