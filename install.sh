@@ -245,7 +245,6 @@ setup_git_ssh() {
     
     # Display public key
     if [[ -f "$ssh_pub" ]]; then
-        install_custom_theme
         echo ""
         info "Your SSH public key:"
         echo ""
@@ -267,6 +266,8 @@ install_zsh_plugin "zsh-autosuggestions" \
 
 install_zsh_plugin "zsh-syntax-highlighting" \
     "https://github.com/zsh-users/zsh-syntax-highlighting"
+
+install_custom_theme
 
 install_sdkman
 install_sdks_from_rc

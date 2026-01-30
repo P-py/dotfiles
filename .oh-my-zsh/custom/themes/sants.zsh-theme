@@ -66,12 +66,12 @@ sants_git_prompt_uncached() {
   git rev-parse --git-dir &>/dev/null || return
   [[ "$(git config --get oh-my-zsh.hide-info 2>/dev/null)" == 1 ]] && return
 
-  local info status output
+  local info git_status output
   info="$(sants_git_info)" || return
-  status="$(sants_git_status)"
+  git_status="$(sants_git_status)"
 
   output="${info:gs/%/%%}"
-  [[ -n "$status" ]] && output+=" $status"
+  [[ -n "$git_status" ]] && output+=" $git_status"
 
   print -r -- "${ZSH_THEME_GIT_PROMPT_PREFIX}${output}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
 }
@@ -113,7 +113,7 @@ get_space() {
 }
 
 _1LEFT="$_USERNAME $_PATH"
-_1RIGHT="[%*]"
+_1RIGHT="[%{$fg[blue]%}%*%{$reset_color%}]"
 
 sants_precmd() {
   local spaces
@@ -128,4 +128,5 @@ PROMPT='> $_LIBERTY '
 RPROMPT='$(sants_git_prompt)'
 
 autoload -U add-zsh-hook
+add-zsh-hook -d precmd sants_precmd  # Remove if exists
 add-zsh-hook precmd sants_precmd

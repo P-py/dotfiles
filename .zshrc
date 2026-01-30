@@ -2,7 +2,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set theme - see https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="bureau"
+ZSH_THEME="sants"
 
 # Plugins to load
 # Standard plugins: $ZSH/plugins/
