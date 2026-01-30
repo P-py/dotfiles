@@ -7,12 +7,6 @@ alias install='sudo apt install'
 alias remove='sudo apt remove'
 alias aptsearch='apt search'
 
-# Navigation
-alias home='cd ~'
-alias docs='cd ~/Documents'
-alias dl='cd ~/Downloads'
-alias dev='cd ~/Development'
-
 # File operations
 alias cp='cp -i'
 alias mv='mv -i'
@@ -26,13 +20,6 @@ alias la='ls -A'
 alias l='ls -CF'
 alias lt='ls -ltrh'
 alias lsize='ls -lSrh'
-
-# Network
-alias ports='netstat -tulanp'
-alias myip='curl ifconfig.me'
-alias localip='hostname -I'
-alias ping='ping -c 5'
-alias speedtest='curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -'
 
 # Process management
 alias psg='ps aux | grep -v grep | grep -i -e VSZ -e'
@@ -75,4 +62,3 @@ alias reload='source ~/.zshrc'
 alias edit='$EDITOR'
 alias zshconfig='$EDITOR ~/.zshrc'
 alias vimconfig='$EDITOR ~/.vimrc'
-alias tmuxconfig='$EDITOR ~/.tmux.conf'

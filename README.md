@@ -10,10 +10,7 @@ Personal dotfiles for Linux configuration using [oh-my-zsh](https://ohmyz.sh/) a
   - Python, Node.js, and npm utilities
   - Auto-suggestions and syntax highlighting
   - Command history search
-  - FZF integration
-- **Git Configuration**: Colorized output, useful aliases, and sensible defaults
 - **Vim Configuration**: Syntax highlighting, line numbers, smart indentation
-- **Tmux Configuration**: Custom keybindings, mouse support, and pretty status bar
 - **Custom Functions**: Archive extraction, directory navigation, process monitoring
 - **System Aliases**: Quick access to common commands
 
@@ -68,32 +65,18 @@ mkdir -p ~/.zsh
 
 # Create symlinks (adjust path if you cloned elsewhere)
 ln -s ~/.dotfiles/.zshrc ~/.zshrc
-ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
 ln -s ~/.dotfiles/.vimrc ~/.vimrc
-ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/.gitignore_global ~/.gitignore_global
 ln -s ~/.dotfiles/.zsh/aliases.zsh ~/.zsh/aliases.zsh
 ln -s ~/.dotfiles/.zsh/functions.zsh ~/.zsh/functions.zsh
-ln -s ~/.dotfiles/.zsh/env.zsh ~/.zsh/env.zsh
 ```
 
 ## ⚙️ Configuration
-
-### Git Setup
-
-Edit `~/.gitconfig` to set your name and email:
-
-```bash
-git config --global user.name "Your Name"
-git config --global user.email "your.email@example.com"
-```
 
 ### ZSH Customization
 
 - Main config: `~/.zshrc`
 - Custom functions: `~/.zsh/functions.zsh`
 - Custom aliases: `~/.zsh/aliases.zsh`
-- Environment variables: `~/.zsh/env.zsh`
 - Local overrides: `~/.zshrc.local` (not tracked by git)
 
 ### Changing ZSH Theme
@@ -145,7 +128,6 @@ Edit `~/.zshrc` and change the `ZSH_THEME` variable. Popular themes:
 - `update`: Update system packages
 - `cleanup`: Clean up old packages
 - `install <pkg>`: Install package
-- `myip`: Get public IP address
 
 **Navigation:**
 - `..`: Go up one directory
@@ -167,15 +149,6 @@ Edit `~/.zshrc` and change the `ZSH_THEME` variable. Popular themes:
 
 See `.zsh/aliases.zsh` for complete list.
 
-## 🎨 Tmux Keybindings
-
-- **Prefix**: `Ctrl-a` (instead of default `Ctrl-b`)
-- **Split horizontal**: `Prefix + |`
-- **Split vertical**: `Prefix + -`
-- **Reload config**: `Prefix + r`
-- **Navigate panes**: `Alt + Arrow Keys`
-- **Switch windows**: `Shift + Left/Right`
-
 ## 📚 Additional Setup
 
 ### Set ZSH as Default Shell
@@ -190,9 +163,6 @@ chsh -s $(which zsh)
 # FZF (fuzzy finder)
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
-
-# Tmux (if not installed)
-sudo apt install tmux
 
 # Vim (if not installed)
 sudo apt install vim
