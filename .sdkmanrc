@@ -1,0 +1,6 @@
+# SDKMAN default SDK versions
+# Format: <candidate>=<version>
+# Use 'sdk list <candidate>' to see available versions
+
+java=24.0.2-tem
+gradle=9.3.0
