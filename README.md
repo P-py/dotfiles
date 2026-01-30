@@ -66,7 +66,7 @@ maven=3.9.6
 - Custom functions: `~/.zsh/functions.zsh`
 - Custom aliases: `~/.zsh/aliases.zsh`
 - Local overrides: `~/.zshrc.local` (not tracked by git)
-- Custom theme: `.oh-my-zsh/custom/themes/bureau-custom.zsh-theme`
+- Custom theme: `.oh-my-zsh/custom/themes/sants.zsh-theme`
 
 ## 🛠️ Included Tools
 
@@ -103,3 +103,5 @@ Feel free to fork this repository and customize it to your needs! If you have su
 - [oh-my-zsh](https://ohmyz.sh/)
 - [zsh-users](https://github.com/zsh-users)
 - All the amazing open-source contributors!
+- The theme available on `.oh-my-zsh` is based on the **bureau** theme from the official oh-my-zsh project. It has been refactored and customized with performance improvements, color changes
+and a simplified git status model.

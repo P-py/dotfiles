@@ -1,4 +1,12 @@
-# oh-my-zsh Sants Theme
+# Sants Theme for oh-my-zsh
+#
+# Based on the "bureau" theme from oh-my-zsh
+# Original theme: https://github.com/ohmyzsh/ohmyzsh/blob/master/themes/bureau.zsh-theme
+#
+# Modifications, refactors and visual changes by Sant | P-py | Pedro Salviano Santos
+#
+# License: MIT License
+
 ### Git [±master ▾●]
 
 ZSH_THEME_GIT_PROMPT_PREFIX="[%{$fg_bold[green]%}±%{$reset_color%}%{$fg_bold[white]%}"
