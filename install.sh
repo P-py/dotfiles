@@ -78,7 +78,6 @@ mkdir -p "$HOME/.zsh"
 echo ""
 echo "🔗 Creating symlinks..."
 link_file "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
-link_file "$DOTFILES_DIR/.vimrc" "$HOME/.vimrc"
 
 # Link custom zsh configuration files
 link_file "$DOTFILES_DIR/.zsh/aliases.zsh" "$HOME/.zsh/aliases.zsh"

@@ -22,11 +22,6 @@ extract() {
     fi
 }
 
-# Create a directory and cd into it
-mkcd() {
-    mkdir -p "$1" && cd "$1"
-}
-
 # Find a file by name
 ff() {
     find . -type f -iname "*$1*"
@@ -40,15 +35,4 @@ finddir() {
 # Quick search in files (grep-based)
 grepsearch() {
     grep -r "$1" .
-}
-
-# Quick weather check (requires curl)
-weather() {
-    curl "wttr.in/${1:-}"
-}
-
-# Generate a random password
-genpass() {
-    local length="${1:-16}"
-    openssl rand -base64 "$length" | tr -d "=+/" | cut -c1-"$length"
 }
