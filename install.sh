@@ -130,8 +130,12 @@ install_sdkman() {
 load_sdkman() {
     local init="$HOME/.sdkman/bin/sdkman-init.sh"
     [[ -f "$init" ]] || error "SDKMAN init not found"
+    # Temporarily disable nounset to avoid issues with SDKMAN init script
+    set +u
     # shellcheck disable=SC1090
     source "$init"
+    # Re-enable nounset
+    set -u
 }
 
 install_sdks_from_rc() {
@@ -150,6 +154,9 @@ install_sdks_from_rc() {
 
     info "Installing SDKs from .sdkmanrc"
 
+    # Disable nounset for SDK commands to avoid SDKMAN internal variable issues
+    set +u
+
     while IFS='=' read -r candidate version; do
         [[ -z "$candidate" || "$candidate" =~ ^# ]] && continue
 
@@ -163,6 +170,9 @@ install_sdks_from_rc() {
             sdk install "$candidate" "$version" || warn "Failed: $candidate $version"
         fi
     done < "$rc"
+    
+    # Re-enable nounset
+    set -u
 }
 
 setup_git_ssh() {
