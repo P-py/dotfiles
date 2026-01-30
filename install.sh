@@ -165,6 +165,66 @@ install_sdks_from_rc() {
     done < "$rc"
 }
 
+setup_git_ssh() {
+    local ssh_dir="$HOME/.ssh"
+    local ssh_key="$ssh_dir/id_ed25519"
+    local ssh_pub="$ssh_key.pub"
+    
+    mkdir -p "$ssh_dir"
+    chmod 700 "$ssh_dir"
+    
+    # Check if SSH key already exists
+    if [[ -f "$ssh_key" ]]; then
+        success "SSH key already exists at $ssh_key"
+    else
+        info "Generating new SSH key..."
+        
+        # Prompt for email
+        local email
+        read -rp "$(echo -e "${LABEL} ${CYAN}Enter your email for SSH key: ${RESET}")" email
+        
+        if [[ -z "$email" ]]; then
+            warn "No email provided, skipping SSH key generation"
+            return
+        fi
+        
+        # Generate SSH key
+        ssh-keygen -t ed25519 -C "$email" -f "$ssh_key" -N "" || {
+            error "Failed to generate SSH key"
+            return 1
+        }
+        
+        success "SSH key generated at $ssh_key"
+    fi
+    
+    # Start ssh-agent and add key
+    if [[ -z "${SSH_AUTH_SOCK:-}" ]]; then
+        info "Starting ssh-agent..."
+        eval "$(ssh-agent -s)" > /dev/null
+    fi
+    
+    # Add key to ssh-agent if not already added
+    if ! ssh-add -l 2>/dev/null | grep -q "$ssh_key"; then
+        info "Adding SSH key to ssh-agent..."
+        ssh-add "$ssh_key" 2>/dev/null || warn "Failed to add key to ssh-agent"
+    else
+        success "SSH key already in ssh-agent"
+    fi
+    
+    # Display public key
+    if [[ -f "$ssh_pub" ]]; then
+        echo ""
+        info "Your SSH public key:"
+        echo ""
+        echo "${BOLD}${GREEN}$(cat "$ssh_pub")${RESET}"
+        echo ""
+        info "Add this key to your Git hosting service (GitHub/GitLab/etc.)"
+        info "GitHub: https://github.com/settings/ssh/new"
+        info "GitLab: https://gitlab.com/-/profile/keys"
+        echo ""
+    fi
+}
+
 info "📦 Installing dotfiles from $DOTFILES_DIR"
 
 install_oh_my_zsh
@@ -177,6 +237,9 @@ install_zsh_plugin "zsh-syntax-highlighting" \
 
 install_sdkman
 install_sdks_from_rc
+
+echo ""
+setup_git_ssh
 
 # Create .zsh directory for custom configurations
 mkdir -p "$HOME/.zsh"
