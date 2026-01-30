@@ -243,14 +243,22 @@ setup_git_ssh() {
         success "SSH key already in ssh-agent"
     fi
     
-    # Display public key
-    if [[ -f "$ssh_pub" ]]; then
+    # Offer to display public key (interactive only)
+    if [[ -f "$ssh_pub" && -t 1 ]]; then
         echo ""
-        info "Your SSH public key:"
-        echo ""
-        echo "${BOLD}${GREEN}$(cat "$ssh_pub")${RESET}"
-        echo ""
-        info "Add this key to your Git hosting service (GitHub/GitLab/etc.)"
+        info "SSH public key generated at: $ssh_pub"
+
+        read -rp "$(echo -e "${LABEL} ${RESET}Show SSH public key now? [y/N]: ${RESET}")" show_key
+
+        if [[ "$show_key" =~ ^[Yy]$ ]]; then
+            echo ""
+            echo "${BOLD}${GREEN}$(cat "$ssh_pub")${RESET}"
+            echo ""
+        else
+            info "You can view it later with: cat $ssh_pub"
+        fi
+
+        info "Add this key to your Git hosting service."
         info "GitHub: https://github.com/settings/ssh/new"
         info "GitLab: https://gitlab.com/-/profile/keys"
         echo ""
