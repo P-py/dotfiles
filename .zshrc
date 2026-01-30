@@ -51,20 +51,6 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias grep='grep --color=auto'
 
-# Git aliases
-alias gs='git status'
-alias ga='git add'
-alias gc='git commit'
-alias gp='git push'
-alias gl='git log --oneline --graph --decorate'
-alias gd='git diff'
-alias gco='git checkout'
-
-# Docker aliases
-alias dc='docker-compose'
-alias dps='docker ps'
-alias di='docker images'
-
 # Load custom configurations if they exist
 if [ -d "$HOME/.zsh" ]; then
     for file in $HOME/.zsh/*.zsh; do

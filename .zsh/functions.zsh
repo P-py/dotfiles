@@ -42,31 +42,6 @@ grepsearch() {
     grep -r "$1" .
 }
 
-# Quick git push to current branch
-gpp() {
-    git push origin $(git branch --show-current)
-}
-
-# Quick git pull from current branch
-gpl() {
-    git pull origin $(git branch --show-current)
-}
-
-# Show disk usage of current directory
-duf() {
-    du -h -d 1 | sort -h
-}
-
-# Show top processes by memory
-topmem() {
-    ps aux | sort -nrk 4 | head -n "${1:-10}"
-}
-
-# Show top processes by CPU
-topcpu() {
-    ps aux | sort -nrk 3 | head -n "${1:-10}"
-}
-
 # Quick weather check (requires curl)
 weather() {
     curl "wttr.in/${1:-}"

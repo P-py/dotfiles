@@ -11,8 +11,8 @@ Personal dotfiles for Linux configuration using [oh-my-zsh](https://ohmyz.sh/) a
   - Auto-suggestions and syntax highlighting
   - Command history search
 - **Vim Configuration**: Syntax highlighting, line numbers, smart indentation
-- **Custom Functions**: Archive extraction, directory navigation, process monitoring
-- **System Aliases**: Quick access to common commands
+- **Custom Functions**: Archive extraction, search utilities
+- **System Aliases**: Quick access to system management commands
 
 ## 📦 Installation
 
@@ -115,12 +115,8 @@ Edit `~/.zshrc` and change the `ZSH_THEME` variable. Popular themes:
 - `ff <name>`: Find files by name
 - `finddir <name>`: Find directories by name
 - `grepsearch <term>`: Grep search in current directory
-- `gpp`: Git push to current branch
-- `gpl`: Git pull from current branch
 - `weather [location]`: Check weather
 - `genpass [length]`: Generate random password
-- `topmem [n]`: Show top N processes by memory
-- `topcpu [n]`: Show top N processes by CPU
 
 ### Useful Aliases
 
@@ -129,23 +125,16 @@ Edit `~/.zshrc` and change the `ZSH_THEME` variable. Popular themes:
 - `cleanup`: Clean up old packages
 - `install <pkg>`: Install package
 
-**Navigation:**
-- `..`: Go up one directory
-- `...`: Go up two directories
+**File Operations:**
+- `cp`: Copy with confirmation
+- `mv`: Move with confirmation
+- `rm`: Remove with confirmation
+
+**List Operations:**
 - `ll`: List all files with details
-
-**Git:**
-- `gs`: Git status
-- `ga`: Git add
-- `gc`: Git commit
-- `gp`: Git push
-- `gl`: Git log (pretty format)
-
-**Docker:**
-- `dc`: Docker compose
-- `dps`: Docker ps
-- `dcu`: Docker compose up
-- `dcd`: Docker compose down
+- `la`: List all including hidden files
+- `lt`: List sorted by time
+- `lsize`: List sorted by size
 
 See `.zsh/aliases.zsh` for complete list.
 
