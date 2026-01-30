@@ -66,6 +66,7 @@ maven=3.9.6
 - Custom functions: `~/.zsh/functions.zsh`
 - Custom aliases: `~/.zsh/aliases.zsh`
 - Local overrides: `~/.zshrc.local` (not tracked by git)
+- Custom theme: `.oh-my-zsh/custom/themes/bureau-custom.zsh-theme`
 
 ## 🛠️ Included Tools
 

@@ -116,6 +116,28 @@ install_zsh_plugin() {
     success "Plugin installed: $name"
 }
 
+install_custom_theme() {
+    local theme_src="$DOTFILES_DIR/.oh-my-zsh/custom/themes/sants.zsh-theme"
+    local theme_dest="$ZSH_CUSTOM/themes/sants.zsh-theme"
+    
+    if [[ ! -f "$theme_src" ]]; then
+        warn "Custom theme not found at $theme_src, skipping"
+        return
+    fi
+    
+    if [[ -f "$theme_dest" ]]; then
+        if cmp -s "$theme_src" "$theme_dest"; then
+            success "Custom theme already up to date"
+            return
+        fi
+        warn "Updating custom theme"
+    fi
+    
+    mkdir -p "$ZSH_CUSTOM/themes"
+    cp "$theme_src" "$theme_dest"
+    success "Custom theme installed"
+}
+
 install_sdkman() {
     if [[ -d "$HOME/.sdkman" ]]; then
         success "SDKMAN already installed"
@@ -177,7 +199,7 @@ install_sdks_from_rc() {
 
 setup_git_ssh() {
     local ssh_dir="$HOME/.ssh"
-    local ssh_key="$ssh_dir/id_ed25519"
+    local ssh_key="$ssh_dir/dot-personal-git"
     local ssh_pub="$ssh_key.pub"
     
     mkdir -p "$ssh_dir"
@@ -187,7 +209,7 @@ setup_git_ssh() {
     if [[ -f "$ssh_key" ]]; then
         success "SSH key already exists at $ssh_key"
     else
-        info "Generating new SSH key..."
+        info "Generating new SSH key (dot-personal-git)..."
         
         # Prompt for email
         local email
@@ -223,6 +245,7 @@ setup_git_ssh() {
     
     # Display public key
     if [[ -f "$ssh_pub" ]]; then
+        install_custom_theme
         echo ""
         info "Your SSH public key:"
         echo ""
