@@ -51,7 +51,7 @@ require_commands() {
 }
 
 # Check for required commands
-for cmd in git curl; do
+for cmd in git curl unzip zip; do
     require_commands "$cmd"
 done
 

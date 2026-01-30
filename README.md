@@ -7,8 +7,11 @@ Personal dotfiles for Linux configuration using [oh-my-zsh](https://ohmyz.sh/) a
 - **ZSH Configuration**: Complete oh-my-zsh setup with useful plugins
   - Git integration
   - Auto-suggestions and syntax highlighting
+- **SDKMAN Integration**: Automatic installation and management of SDKs (Java, Gradle, Maven, etc.)
+- **Git SSH Auto-Configuration**: Automated SSH key generation and setup for Git hosting services
 - **Custom Functions**: Archive extraction, search utilities
 - **System Aliases**: Quick access to system management commands
+- **Smart Symlinking**: Automatic backup of existing configurations with timestamp
 
 ## 📦 Installation
 
@@ -17,17 +20,16 @@ Personal dotfiles for Linux configuration using [oh-my-zsh](https://ohmyz.sh/) a
 - ZSH (install with: `sudo apt install zsh`)
 - Git (install with: `sudo apt install git`)
 - curl (install with: `sudo apt install curl`)
+- unzip and zip (install with: `sudo apt install unzip zip`) - Required for SDKMAN
+- ssh-keygen (usually pre-installed on most Linux/Unix systems)
 
 ### Quick Install
 
 ```bash
-# Clone the repository to ~/.dotfiles (recommended location)
 git clone https://github.com/P-py/dotfiles.git ~/.dotfiles
 
-# Navigate to the directory
 cd ~/.dotfiles
 
-# Run the installation script
 ./install.sh
 ```
 
@@ -40,9 +42,21 @@ The installation script will:
 1. Check for required dependencies (git, curl)
 2. Install oh-my-zsh if not already installed
 3. Install zsh-autosuggestions plugin
-4. Install zsh-syntax-highlighting plugin
-5. Create symlinks for all dotfiles including custom .zsh configurations
-6. Backup any existing configuration files
+4. Install SDKMAN (Software Development Kit Manager)
+6. Install SDKs specified in `.sdkmanrc` (if file exists)
+7. Generate SSH keys for Git if not already present
+8. Add SSH key to ssh-agent and display public key
+9. Create symlinks for all dotfiles including custom .zsh configurations
+10. SDKMAN Configuration
+
+Update the `.sdkmanrc` file in the dotfiles directory to specify SDK versions to install:
+
+```bash
+# .sdkmanrc
+java=21.0.5-tem
+gradle=8.11.1
+maven=3.9.6
+```
 
 ## ⚙️ Configuration
 
@@ -58,17 +72,8 @@ The installation script will:
 ### ZSH Plugins
 
 - **git**: Git aliases and functions
-- **docker**: Docker command completion
-- **docker-compose**: Docker Compose completion
-- **kubectl**: Kubernetes command completion
-- **python/pip**: Python development tools
-- **npm/node**: Node.js development tools
-- **sudo**: Double ESC to add sudo to previous command
-- **command-not-found**: Suggests package for unknown commands
-- **colored-man-pages**: Colorized man pages
 - **zsh-autosuggestions**: Fish-like autosuggestions
 - **zsh-syntax-highlighting**: Fish-like syntax highlighting
-- **history-substring-search**: Better history search
 
 ### Custom Functions
 
